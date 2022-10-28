@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/pgdata:/var/lib/postgresql/data
+      - ./db/initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=provider,resource-one,resource-two
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
