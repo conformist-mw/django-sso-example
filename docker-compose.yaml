@@ -13,3 +13,18 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+  provider:
+    build:
+      context: ./provider
+    tty: true
+    command: python manage.py runserver 0:8100
+    volumes:
+      - ./provider:/code
+    ports:
+      - "8100:8100"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://provider:provider@db:5432/provider
+      - DEBUG=1
+      - SECRET_KEY=provider-secret-key
