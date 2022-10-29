@@ -28,3 +28,19 @@ services:
       - DATABASE_URL=postgres://provider:provider@db:5432/provider
       - DEBUG=1
       - SECRET_KEY=provider-secret-key
+
+  resource-one:
+    build:
+      context: ./resource-one
+    tty: true
+    command: python manage.py runserver 0:8200
+    volumes:
+      - ./resource-one:/code
+    ports:
+      - "8200:8200"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://resource-one:resource-one@db:5432/resource-one
+      - DEBUG=1
+      - SECRET_KEY=resource-one-secret-key
