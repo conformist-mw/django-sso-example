@@ -25,9 +25,10 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgres://provider:provider@db:5432/provider
-      - DEBUG=1
-      - SECRET_KEY=provider-secret-key
+      VIRTUAL_HOST: provider.local
+      DATABASE_URL: postgres://provider:provider@db:5432/provider
+      DEBUG: 1
+      SECRET_KEY: provider-secret-key
 
   resource-one:
     build:
@@ -41,6 +42,16 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgres://resource-one:resource-one@db:5432/resource-one
-      - DEBUG=1
-      - SECRET_KEY=resource-one-secret-key
+      VIRTUAL_HOST: resource-one.local
+      DATABASE_URL: postgres://resource-one:resource-one@db:5432/resource-one
+      DEBUG: 1
+      SECRET_KEY: resource-one-secret-key
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    restart: always
+    privileged: true
