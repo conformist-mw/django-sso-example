@@ -29,6 +29,7 @@ services:
       DATABASE_URL: postgres://provider:provider@db:5432/provider
       DEBUG: 1
       SECRET_KEY: provider-secret-key
+      ALLOWED_HOSTS: provider.local
 
   resource-one:
     build:
@@ -46,6 +47,7 @@ services:
       DATABASE_URL: postgres://resource-one:resource-one@db:5432/resource-one
       DEBUG: 1
       SECRET_KEY: resource-one-secret-key
+      ALLOWED_HOSTS: resource-one.local
 
   nginx-proxy:
     image: jwilder/nginx-proxy

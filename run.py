@@ -17,9 +17,9 @@ def generate_manage_cmd(*args):
 
 @click.command()
 @click.argument('name')
-@click.argument('command')
+@click.argument('command', nargs=-1)
 def process(name, command):
-    manage_py_cmd = generate_manage_cmd(command)
+    manage_py_cmd = generate_manage_cmd(*command)
     run_compose_cmd(name, manage_py_cmd)
 
 
