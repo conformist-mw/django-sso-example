@@ -26,6 +26,7 @@ services:
       - db
     environment:
       VIRTUAL_HOST: provider.local
+      CERT_NAME: provider
       DATABASE_URL: postgres://provider:provider@db:5432/provider
       DEBUG: 1
       SECRET_KEY: provider-secret-key
@@ -44,6 +45,7 @@ services:
       - db
     environment:
       VIRTUAL_HOST: resource-one.local
+      CERT_NAME: resource-one
       DATABASE_URL: postgres://resource-one:resource-one@db:5432/resource-one
       DEBUG: 1
       SECRET_KEY: resource-one-secret-key
@@ -53,6 +55,8 @@ services:
     image: jwilder/nginx-proxy
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certs:/etc/nginx/certs:ro
     privileged: true
