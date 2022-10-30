@@ -55,5 +55,4 @@ services:
       - "80:80"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-    restart: always
     privileged: true

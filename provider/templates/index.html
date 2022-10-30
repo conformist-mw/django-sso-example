@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <h1>Hello {{ user.first_name }}!</h1>
+    <a href="{% url 'logout' %}"><button>Logout <small>({{ user.email }})</small></button></a>
+    {% if user.is_staff %}
+      <a href="{% url 'admin:index' %}"><button class="contrast">Admin Page</button></a>
+    {% endif %}
+  {% else %}
+    <h1>Hello, unauthorized user!</h1>
+    <ul>
+      <li><a href="{% url 'signup' %}">Sign up</a></li>
+      <li><a href="{% url 'login' %}">Log in</a></li>
+    </ul>
+  {% endif %}
+{% endblock %}
