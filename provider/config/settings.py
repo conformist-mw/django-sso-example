@@ -20,9 +20,11 @@ DEFAULT_APPS = [
     'django.contrib.staticfiles',
 ]
 
+THIRDPARTY_APPS = ['oauth2_provider']
+
 INTERNAL_APPS = ['core']
 
-INSTALLED_APPS = DEFAULT_APPS + INTERNAL_APPS
+INSTALLED_APPS = DEFAULT_APPS + THIRDPARTY_APPS + INTERNAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
